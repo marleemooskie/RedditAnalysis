@@ -1,1 +1,79 @@
-'''This script includes the function to perform sentiment analysis using VADER ona string of text.'''import nltknltk.download("vader_lexicon")from nltk.sentiment import SentimentIntensityAnalyzerfrom collections import Countersia = SentimentIntensityAnalyzer()class text:    def __init__(self, text):        self.text = text        self.sentiment_scores = []        self.top_sentiments = []        self.sentiment_counts = {}        def analyze_sentiment(self):        '''        Returns        -------        TYPE List of dictionaries including positive, neutral, negative, and compound scores.            DESCRIPTION. This returns the VADER sentiment analysis scores for each            text string inputted and stores it under self.sentiment_scores.        '''        # Loop through each string in text list and perform sentiment analysis        self.sentiment_scores = [sia.polarity_scores(t) for t in self.text]        print("Retrieving sentiment: ")        # Store this into the class        return self.sentiment_scores        def find_top_sentiments(self):        '''        Returns        -------        top_sentiments : TYPE List of top sentiment scores for each text string.            DESCRIPTION. Usees the compound score to find the overall sentiment            of the text string.        '''        top_sentiments = []        # Loop through each text string        for sentiment_dict in self.sentiment_scores:            compound_score = sentiment_dict['compound']            # If compound score is less than -.05 its negative            if (compound_score <= -.05):                top_sentiment = 'Negative'            # If compound score is greater than .05 its positive            elif (compound_score >= .05):                top_sentiment = 'Positive'            # Otherwise, its neutral            else:                top_sentiment = 'Neutral'            # Add top sentiment to the list of all top sentiments            top_sentiments.append(top_sentiment)        self.top_sentiments = top_sentiments        return top_sentiments        def count_sentiments(self):        '''        Returns        -------        counts : TYPE Dictionary of counts for each sentiment type.            DESCRIPTION. Counts how many negative, positive, and neutral tweets            there are in the list of text strings.        '''        counts = Counter(self.top_sentiments)        self.sentiment_counts = counts        return counts                        text1 = text(["It's a wonderful day out!",              "I hate my life.",              "The sky is green.",              "You are the ugliest person I have ever seen."])text1.analyze_sentiment()text1.sentiment_scorestext1.find_top_sentiments()text1.top_sentiments
+'''
+This script includes the function to perform sentiment analysis using VADER on
+a string of text.
+'''
+import nltk
+nltk.download("vader_lexicon")
+from nltk.sentiment import SentimentIntensityAnalyzer
+from collections import Counter
+sia = SentimentIntensityAnalyzer()
+
+class text:
+    def __init__(self, text):
+        self.text = text
+        self.sentiment_scores = []
+        self.top_sentiments = []
+        self.sentiment_counts = {}
+    
+    def analyze_sentiment(self):
+        '''
+        Returns
+        -------
+        TYPE List of dictionaries including positive, neutral, negative, and compound scores.
+            DESCRIPTION. This returns the VADER sentiment analysis scores for each
+            text string inputted and stores it under self.sentiment_scores.
+        '''
+        # Loop through each string in text list and perform sentiment analysis
+        self.sentiment_scores = [sia.polarity_scores(t) for t in self.text]
+        print("Retrieving sentiment: ")
+        # Store this into the class
+        return self.sentiment_scores
+    
+    def find_top_sentiments(self):
+        '''
+        Returns
+        -------
+        top_sentiments : TYPE List of top sentiment scores for each text string.
+            DESCRIPTION. Usees the compound score to find the overall sentiment
+            of the text string.
+        '''
+        top_sentiments = []
+        # Loop through each text string
+        for sentiment_dict in self.sentiment_scores:
+            compound_score = sentiment_dict['compound']
+            # If compound score is less than -.05 its negative
+            if (compound_score <= -.05):
+                top_sentiment = 'Negative'
+            # If compound score is greater than .05 its positive
+            elif (compound_score >= .05):
+                top_sentiment = 'Positive'
+            # Otherwise, its neutral
+            else:
+                top_sentiment = 'Neutral'
+            # Add top sentiment to the list of all top sentiments
+            top_sentiments.append(top_sentiment)
+        self.top_sentiments = top_sentiments
+        return top_sentiments
+    
+    def count_sentiments(self):
+        '''
+        Returns
+        -------
+        counts : TYPE Dictionary of counts for each sentiment type.
+            DESCRIPTION. Counts how many negative, positive, and neutral tweets
+            there are in the list of text strings.
+        '''
+        counts = Counter(self.top_sentiments)
+        self.sentiment_counts = counts
+        return counts
+        
+        
+        
+text1 = text(["It's a wonderful day out!",
+              "I hate my life.",
+              "The sky is green.",
+              "You are the ugliest person I have ever seen."])
+text1.analyze_sentiment()
+text1.sentiment_scores
+text1.find_top_sentiments()
+text1.top_sentiments
