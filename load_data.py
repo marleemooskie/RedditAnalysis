@@ -2,7 +2,22 @@
 import pandas as pd
 import pickle
 
-def load_data(data_pickle):
+def load_data(data_pickle,location):
+    """
+    Parameters
+    ----------
+    data_pickle : TYPE
+        DESCRIPTION. Pathway for pickle file of twitter data.
+    location : TYPE
+        DESCRIPTION. What location this data was scraped for specifically.
+
+    Returns
+    -------
+    data : TYPE
+        DESCRIPTION. Dataframe of tweets cleaned for sentiment analysis by VADER.
+        VADER supports hashtags, punctuations, and even emojis, so these were left in.
+
+    """
     # Load the pickle in
     with open("climate_change_Arizona_posts.pkl", "rb") as f:
         data = pickle.load(f)
@@ -20,4 +35,9 @@ def load_data(data_pickle):
     
     # Remove any \n from the text
     data["text"] = data["text"].str.replace("\n", "", regex=True)
+    
+    # Add a location column
+    data['Location'] = [location] * data.shape[0]
+    
+    return data
         

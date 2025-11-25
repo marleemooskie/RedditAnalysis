@@ -3,17 +3,25 @@ This script includes the function to perform sentiment analysis using VADER on
 a string of text.
 '''
 import nltk
+import pandas as pd
 nltk.download("vader_lexicon")
 from nltk.sentiment import SentimentIntensityAnalyzer
 from collections import Counter
 sia = SentimentIntensityAnalyzer()
 
-class text:
-    def __init__(self, text):
-        self.text = text
+class sentiment:
+    def __init__(self, df):
+        self.id = df.id
+        self.edit_history_tweet_ids = df.edit_history_tweet_ids
+        self.date = df.date
+        self.Location = df.Location
+        self.text = df.text
         self.sentiment_scores = []
         self.top_sentiments = []
         self.sentiment_counts = {}
+        self.positive_score = []
+        self.negative_score = []
+        self.compound_score = []
     
     def analyze_sentiment(self):
         '''
@@ -25,6 +33,18 @@ class text:
         '''
         # Loop through each string in text list and perform sentiment analysis
         self.sentiment_scores = [sia.polarity_scores(t) for t in self.text]
+        # Extract the positive, negative, and compound scores for each
+        positive_score = []
+        negative_score = []
+        compound_score = []
+        for score in self.sentiment_scores:
+            positive_score.append(score['pos'])
+            negative_score.append(score['neg'])
+            compound_score.append(score['compound'])
+        self.positive_score = positive_score
+        self.negative_score = negative_score
+        self.compound_score = compound_score
+        
         print("Retrieving sentiment: ")
         # Store this into the class
         return self.sentiment_scores
@@ -55,25 +75,25 @@ class text:
         self.top_sentiments = top_sentiments
         return top_sentiments
     
-    def count_sentiments(self):
+    def count_sentiments(self, location_group=False):
         '''
+        Parameters
+        ----------
+        group_by : TYPE String of a variable name
+            DESCRIPTION. A variable we want to group counts by.
+            
         Returns
         -------
         counts : TYPE Dictionary of counts for each sentiment type.
             DESCRIPTION. Counts how many negative, positive, and neutral tweets
             there are in the list of text strings.
         '''
-        counts = Counter(self.top_sentiments)
+        if location_group:
+            data = pd.DataFrame({'Location':self.Location,'top_sentiments':self.top_sentiments})
+            counts = Counter((row.Location, row.top_sentiments) for row in data.itertuples())
+        else:
+            counts = Counter(self.top_sentiments)
         self.sentiment_counts = counts
+
         return counts
         
-        
-        
-text1 = text(["It's a wonderful day out!",
-              "I hate my life.",
-              "The sky is green.",
-              "You are the ugliest person I have ever seen."])
-text1.analyze_sentiment()
-text1.sentiment_scores
-text1.find_top_sentiments()
-text1.top_sentiments
