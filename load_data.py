@@ -19,7 +19,7 @@ def load_data(data_pickle,location):
 
     """
     # Load the pickle in
-    with open("climate_change_Arizona_posts.pkl", "rb") as f:
+    with open(data_pickle, "rb") as f:
         data = pickle.load(f)
     
     # Change the date into a date format

@@ -4,17 +4,19 @@ In this file, we will load in the data and perform sentiment analysis.
 '''
 import os
 import pandas as pd
-import load_data
+import load_data as load_data
 import sentimentAnalysis
 import matplotlib.pyplot as plt
 pd.set_option('display.max_columns', None)
 
 # Load in the data
-az_path = "/Users/marleeyork/Documents/RedditAnalysis/climate_change_Arizona_posts.pkl"
-ia_path = "/Users/marleeyork/Documents/RedditAnalysis/climate_change_Iowa_posts.pkl"
+#az_path = "/Users/marleeyork/Documents/RedditAnalysis/climate_change_Arizona_posts.pkl"
+#ia_path = "/Users/marleeyork/Documents/RedditAnalysis/climate_change_Iowa_posts.pkl"
+az_path = "/Users/esd96/OneDrive - Northern Arizona University/Fall_2025/SDM_final/RedditAnalysis/climate_change_Arizona_posts.pkl"
+ia_path = "/Users/esd96/OneDrive - Northern Arizona University/Fall_2025/SDM_final/RedditAnalysis/climate_change_Iowa_posts.pkl"
 
-AZ_df = load_data(az_path,location="AZ")
-IA_df = load_data(ia_path,location="IA")
+AZ_df = load_data.load_data(az_path,location="AZ")
+IA_df = load_data.load_data(ia_path,location="IA")
 
 # Concat the dataframes
 df = pd.concat([AZ_df,IA_df])
