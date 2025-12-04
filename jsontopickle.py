@@ -54,8 +54,26 @@ AZ_PICKLE_FILE = 'climate_change_Arizona_posts.pkl'
 IOWA_JSONL_FILE = 'climate_change_Iowa_posts.jsonl'
 IOWA_PICKLE_FILE = 'climate_change_Iowa_posts.pkl'
 
+FLORIDA_JSONL_FILE = 'climate_change_Florida_posts.jsonl'
+FLORIDA_PICKLE_FILE = 'climate_change_Florida_posts.pkl'
+
+WASH_JSONL_FILE = 'climate_change_Washington_posts.jsonl'
+WASH_PICKLE_FILE = 'climate_change_Washington_posts.pkl'
+
+NY_JSONL_FILE = 'climate_change_New_York_posts.jsonl'
+NY_PICKLE_FILE = 'climate_change_New_York_posts.pkl'
+
 # Run the conversion for the Arizona data
 jsonl_to_pickle(AZ_JSONL_FILE, AZ_PICKLE_FILE)
 
 # Run the conversion for the Iowa data
 jsonl_to_pickle(IOWA_JSONL_FILE, IOWA_PICKLE_FILE)
+
+# Run the conversion for the Florida data
+jsonl_to_pickle(FLORIDA_JSONL_FILE, FLORIDA_PICKLE_FILE)
+
+# Run the conversion for the Washington data
+jsonl_to_pickle(WASH_JSONL_FILE, WASH_PICKLE_FILE)
+
+# Run the conversion for the New York data
+jsonl_to_pickle(NY_JSONL_FILE, NY_PICKLE_FILE)

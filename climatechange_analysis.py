@@ -2,10 +2,10 @@
 In this file, we will load in the data and perform sentiment analysis.
 
 '''
-import os
+#import os
 import pandas as pd
 import load_data as load_data
-import sentimentAnalysis
+import sentimentAnalysis as sentimentAnalysis
 import matplotlib.pyplot as plt
 pd.set_option('display.max_columns', None)
 
@@ -14,15 +14,21 @@ pd.set_option('display.max_columns', None)
 #ia_path = "/Users/marleeyork/Documents/RedditAnalysis/climate_change_Iowa_posts.pkl"
 az_path = "/Users/esd96/OneDrive - Northern Arizona University/Fall_2025/SDM_final/RedditAnalysis/climate_change_Arizona_posts.pkl"
 ia_path = "/Users/esd96/OneDrive - Northern Arizona University/Fall_2025/SDM_final/RedditAnalysis/climate_change_Iowa_posts.pkl"
+fl_path = "/Users/esd96/OneDrive - Northern Arizona University/Fall_2025/SDM_final/RedditAnalysis/climate_change_Florida_posts.pkl"
+w_path = "/Users/esd96/OneDrive - Northern Arizona University/Fall_2025/SDM_final/RedditAnalysis/climate_change_Washington_posts.pkl"
+ny_path = "/Users/esd96/OneDrive - Northern Arizona University/Fall_2025/SDM_final/RedditAnalysis/climate_change_New_York_posts.pkl"
 
 AZ_df = load_data.load_data(az_path,location="AZ")
 IA_df = load_data.load_data(ia_path,location="IA")
+fl_df = load_data.load_data(fl_path,location="FL")
+w_df = load_data.load_data(w_path,location="W")
+ny_df = load_data.load_data(ny_path,location="NY")
 
 # Concat the dataframes
-df = pd.concat([AZ_df,IA_df])
+df = pd.concat([AZ_df,IA_df, fl_df, w_df, ny_df])
 
 # Create sentiment class
-sentiment1 = sentiment(df)
+sentiment1 = sentimentAnalysis.sentiment(df)
 
 # Analyze sentiment of each tweet
 sentiment1.analyze_sentiment()
