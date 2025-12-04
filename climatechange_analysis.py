@@ -21,7 +21,7 @@ ny_path = "/Users/esd96/OneDrive - Northern Arizona University/Fall_2025/SDM_fin
 AZ_df = load_data.load_data(az_path,location="AZ")
 IA_df = load_data.load_data(ia_path,location="IA")
 fl_df = load_data.load_data(fl_path,location="FL")
-w_df = load_data.load_data(w_path,location="W")
+w_df = load_data.load_data(w_path,location="WA")
 ny_df = load_data.load_data(ny_path,location="NY")
 
 # Concat the dataframes
@@ -68,4 +68,6 @@ plt.title("Sentiment Counts by Location")
 plt.legend(title="Sentiment")
 plt.tight_layout()
 plt.show()
+
+#bootstrap by state - what is the mean sentiment
 
